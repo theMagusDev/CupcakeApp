@@ -16,6 +16,7 @@
 package com.example.cupcake
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,7 +63,7 @@ class StartFragment : Fragment() {
     fun orderCupcake(quantity: Int) {
         sharedViewModel.setQuantity(quantity)
         if(sharedViewModel.hasNoFlavorSet()) {
-            sharedViewModel.setFlavor(getString(R.string.flavor))
+            sharedViewModel.setFlavor(getString(R.string.vanilla))
         }
         findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
     }
