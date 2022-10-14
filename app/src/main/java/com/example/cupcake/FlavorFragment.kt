@@ -25,6 +25,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cupcake.databinding.FragmentFlavorBinding
 import com.example.cupcake.model.OrderViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * [FlavorFragment] allows a user to choose a cupcake flavor for the order.

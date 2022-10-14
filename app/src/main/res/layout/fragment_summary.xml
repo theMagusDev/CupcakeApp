@@ -54,6 +54,7 @@
 
                 <TextView
                     android:id="@+id/quantity"
+                    android:text="@{@string/quantity_summary(viewModel.quantity.toString())}"
                     style="@style/Widget.Cupcake.TextView.OrderSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,6 +78,7 @@
 
                 <TextView
                     android:id="@+id/flavor"
+                    android:text="@{viewModel.flavor}"
                     style="@style/Widget.Cupcake.TextView.OrderSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,6 +102,7 @@
 
                 <TextView
                     android:id="@+id/date"
+                    android:text="@{viewModel.date}"
                     style="@style/Widget.Cupcake.TextView.OrderSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,6 +119,7 @@
 
                 <TextView
                     android:id="@+id/total"
+                    android:text="@{viewModel.price.toString()}"
                     style="@style/Widget.Cupcake.TextView.FinalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
