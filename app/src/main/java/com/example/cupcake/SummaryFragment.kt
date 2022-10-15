@@ -50,9 +50,14 @@ class SummaryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
-            sendButton.setOnClickListener { sendOrder() }
-            viewModel = sharedViewModel
+            // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
+
+            // Assign the view model to a property in the binding class
+            viewModel = sharedViewModel
+
+            // Assign the fragment
+            summaryFragment = this@SummaryFragment
         }
     }
 
