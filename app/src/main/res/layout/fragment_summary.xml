@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2020 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,9 +19,11 @@
     tools:context=".SummaryFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.cupcake.model.OrderViewModel" />
+
         <variable
             name="summaryFragment"
             type="com.example.cupcake.SummaryFragment" />
@@ -147,8 +148,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> summaryFragment.cancelOrder()}"
                 android:layout_marginTop="@dimen/margin_between_elements"
-                android:text="@string/cancel"
-                />
+                android:text="@string/cancel" />
 
         </LinearLayout>
     </ScrollView>
