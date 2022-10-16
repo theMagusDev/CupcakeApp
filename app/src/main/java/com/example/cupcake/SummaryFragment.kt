@@ -67,7 +67,7 @@ class SummaryFragment : Fragment() {
      */
     fun sendOrder() {
         val numberOfCupcakes = sharedViewModel.quantity.value ?: 0
-
+        val userName = binding?.userNameEditText?.text.toString()
         val orderDetails = getString(
             R.string.order_details,
             resources.getQuantityString(R.plurals.cupcakes, numberOfCupcakes, numberOfCupcakes),
@@ -78,7 +78,7 @@ class SummaryFragment : Fragment() {
 
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order))
+            putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order, userName))
             putExtra(Intent.EXTRA_TEXT, orderDetails)
         }
 

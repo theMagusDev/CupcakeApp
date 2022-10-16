@@ -1,12 +1,16 @@
 package com.example.cupcake.model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.cupcake.R
+import com.example.cupcake.data.Datasource
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.random.Random
 
 // Price for a single cupcake
 private const val PRICE_PER_CUPCAKE = 2.00
@@ -29,6 +33,11 @@ class OrderViewModel : ViewModel() {
         NumberFormat.getCurrencyInstance().format(it)
     }
 
+    private var _enabledPickupOptions = listOf<Boolean>()
+    val enabledPickupOptions: List<Boolean>
+        get() = _enabledPickupOptions
+
+    val bananaFlavorPickupDates = Datasource().loadStorageOf("Banana")
     val dateOptions = getPickupOptions()
 
     init {
@@ -57,6 +66,14 @@ class OrderViewModel : ViewModel() {
         return _date.value.isNullOrEmpty()
     }
 
+    fun findFirstAvailableOptionIndex(): Int? {
+        for (i in _enabledPickupOptions.indices) {
+            if (_enabledPickupOptions[i]) return i
+        }
+
+        return null
+    }
+
     private fun getPickupOptions(): List<String> {
         val options = mutableListOf<String>()
         val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
@@ -79,6 +96,21 @@ class OrderViewModel : ViewModel() {
             calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
 
         _price.value = calculatedPrice
+    }
+
+    fun updateEnabledPickupOptions() {
+        val finalList = mutableListOf<Boolean>()
+        when(_flavor.value) {
+            "Banana" -> {
+                finalList.addAll(bananaFlavorPickupDates)
+            }
+            else -> {
+                repeat(dateOptions.size) {
+                    finalList.add(true)
+                }
+            }
+        }
+        _enabledPickupOptions = finalList
     }
 
     fun resetOrder() {

@@ -64,8 +64,9 @@ class FlavorFragment : Fragment() {
      * Navigate to the next screen to choose pickup date.
      */
     fun goToNextScreen() {
+        sharedViewModel.updateEnabledPickupOptions()
         if (sharedViewModel.hasNoPickupDateSet())
-            sharedViewModel.setDate(sharedViewModel.dateOptions[0])
+            sharedViewModel.setDate(sharedViewModel.dateOptions[sharedViewModel.findFirstAvailableOptionIndex() ?: 0])
         findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
     }
 
