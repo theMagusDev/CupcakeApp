@@ -5,6 +5,8 @@ import org.junit.Rule
 import org.junit.Test
 import java.text.NumberFormat
 
+private const val PRICE_PER_CUPCAKE = 2.00
+
 class ViewModelTests {
     @get:Rule
     // Specify that LiveData objects should not call the main thread.
@@ -20,13 +22,31 @@ class ViewModelTests {
     }
 
     @Test
+    fun quantity_six_cupcakes() {
+        val viewModel = OrderViewModel()
+        viewModel.quantity.observeForever {}
+        viewModel.setQuantity(6)
+        assertEquals(6, viewModel.quantity.value)
+    }
+
+    @Test
     fun price_twelve_cupcakes() {
         val viewModel = OrderViewModel()
         viewModel.price.observeForever {}
         viewModel.setQuantity(12)
         val formatter: NumberFormat = NumberFormat.getCurrencyInstance()
         formatter.maximumFractionDigits = 2
-        assertEquals(formatter.format(24.00), viewModel.price.value)
+        assertEquals(formatter.format(PRICE_PER_CUPCAKE * 12), viewModel.price.value)
+    }
+
+    @Test
+    fun price_six_cupcakes() {
+        val viewModel = OrderViewModel()
+        viewModel.price.observeForever {}
+        viewModel.setQuantity(6)
+        val formatter: NumberFormat = NumberFormat.getCurrencyInstance()
+        formatter.maximumFractionDigits = 2
+        assertEquals(formatter.format(PRICE_PER_CUPCAKE * 6), viewModel.price.value)
     }
 
 }
